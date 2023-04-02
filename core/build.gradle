@@ -1,22 +1,19 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace 'com.example.patientapp'
+    namespace 'com.example.patientapp.core'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.patientapp"
         minSdk 27
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -36,17 +33,10 @@ android {
         viewBinding true
         dataBinding true
     }
-
 }
 
 dependencies {
-    implementation project(":data")
-    implementation project(":core")
-    implementation project(":presentation")
 
-
-    //Dagger-Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
-    implementation "androidx.hilt:hilt-navigation-fragment:1.0.0"
+    //Image Loading Versions
+    implementation "io.coil-kt:coil:2.0.0-rc03"
 }
