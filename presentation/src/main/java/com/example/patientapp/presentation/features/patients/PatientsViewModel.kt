@@ -3,7 +3,7 @@ package com.example.patientapp.presentation.features.patients
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.patientapp.domain.model.patients.Data
-import com.example.patientapp.domain.repo.patients.PatientsRepo
+import com.example.patientapp.domain.repo.PatientsRepo
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ class PatientsViewModel @Inject constructor(private val repo: PatientsRepo):View
     private val _patientsStateFlow:MutableStateFlow<List<Data?>?> = MutableStateFlow(emptyList())
     val patientsStateFlow:StateFlow<List<Data?>?> = _patientsStateFlow
 
-    private val _patientsLoadingStateFlow:MutableStateFlow<Boolean> = MutableStateFlow(true)
+    private val _patientsLoadingStateFlow:MutableStateFlow<Boolean> = MutableStateFlow(false)
     val patientsLoadingStateFlow:StateFlow<Boolean> = _patientsLoadingStateFlow
 
     private val _patientsErrorStateFlow:MutableStateFlow<Exception?> = MutableStateFlow(null)

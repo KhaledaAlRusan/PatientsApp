@@ -35,6 +35,4 @@ object NetworkModule {
 //    fun providePatientRepo(patientDataSource: PatientDataSource):PatientsRepo{
 //        return PatientsRepo(patientDataSource)
 //    }
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.patientapp.presentation.features.adapters
+package com.example.patientapp.presentation.features.patients.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
