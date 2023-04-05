@@ -2,11 +2,14 @@ package com.example.patientapp.presentation.features.patients.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.patientapp.domain.model.patients.Data
 import com.example.patientapp.presentation.databinding.RowPatientBinding
 
-class PatientsAdapter(private val patients:List<Data?>?):RecyclerView.Adapter<PatientsAdapter.PatientsViewHolder>(){
+class PatientsAdapter():
+    ListAdapter<Data?,PatientsAdapter.PatientsViewHolder>(DiffCallBack){
 
     var indexLastSelected = -1
 
@@ -17,11 +20,9 @@ class PatientsAdapter(private val patients:List<Data?>?):RecyclerView.Adapter<Pa
     }
 
     override fun onBindViewHolder(holder: PatientsViewHolder, position: Int) {
-        val model = patients?.get(position)
+        val model = getItem(position)
         holder.bind(model,position)
     }
-
-    override fun getItemCount() = patients?.size ?:0
 
 
 
@@ -35,18 +36,28 @@ class PatientsAdapter(private val patients:List<Data?>?):RecyclerView.Adapter<Pa
 
                     //if not default
                     if(indexLastSelected != -1){
-                        patients?.get(indexLastSelected)?.selected = false
+                        getItem(indexLastSelected)?.selected = false
                         notifyItemChanged(indexLastSelected)
                     }
 
                     indexLastSelected = position
-                    patients?.get(position)?.selected = true
-                    notifyItemChanged(indexLastSelected)
-
+                    getItem(position)?.selected = true
+                    notifyItemChanged(position)
                 }
             }
 
         }
+    }
+
+    private object DiffCallBack:DiffUtil.ItemCallback<Data?>(){
+        override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
+            return oldItem == newItem
+        }
+
     }
 
 

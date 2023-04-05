@@ -55,4 +55,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     kapt "com.google.dagger:hilt-compiler:2.44"
     implementation "androidx.hilt:hilt-navigation-fragment:1.0.0"
+
+
+    //Swipe refresher
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

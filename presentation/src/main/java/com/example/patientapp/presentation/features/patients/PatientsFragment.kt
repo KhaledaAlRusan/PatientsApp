@@ -16,6 +16,7 @@ import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.PatientsFragmentBinding
 import com.example.patientapp.presentation.features.patients.adapters.PatientsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class PatientsFragment:Fragment() {
 
     private lateinit var binding: PatientsFragmentBinding
     private val viewModel: PatientsViewModel by viewModels()
+    private lateinit var adapter: PatientsAdapter
 
 
     override fun onCreateView(
@@ -38,8 +40,14 @@ class PatientsFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initAdapter()
         initObserver()
         initListener()
+    }
+
+    private fun initAdapter() {
+        adapter = PatientsAdapter()
+        binding.recyclerView.adapter = adapter
     }
 
     private fun initListener() {
@@ -47,13 +55,22 @@ class PatientsFragment:Fragment() {
             Log.d("TAGGG", "didn't Enter the fragment")
             findNavController().navigate(R.id.action_patientsFragment_to_addPatientFragment)
         }
+
+        binding.swipeRefresher.setOnRefreshListener {
+            viewModel.getPatients()
+            lifecycleScope.launch {
+                delay(3000)
+                binding.swipeRefresher.isRefreshing = false
+            }
+        }
+
     }
 
     private fun initObserver() {
         lifecycleScope.launch {
             viewModel.patientsStateFlow.collect {
                 if (!it.isNullOrEmpty()) {
-                    binding.recyclerView.adapter = PatientsAdapter(it)
+                    adapter.submitList(it)
                 }
             }
         }

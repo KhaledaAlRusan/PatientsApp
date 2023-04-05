@@ -63,29 +63,47 @@ class AddPatientFragment:Fragment(){
     private fun infoIsValid(): Boolean {
         var isValid = true
 
-        if(binding.editTextAddress.text?.isEmpty() == true){
+        if(binding.editTextFullName.text?.isEmpty() == true){
             isValid = false
             binding.textFullName.error = "Field is Empty"
+        }
+        else{
+            binding.textFullName.error = ""
         }
         if(binding.editTextEmail.text?.isEmpty()== true){
             isValid = false
             binding.textEmail.error = "Field is Empty"
         }
+        else{
+            binding.textEmail.error = ""
+        }
         if(binding.editTextAddress.text?.isEmpty()== true){
             isValid = false
             binding.textAddress.error = "Field is Empty"
+        }
+        else{
+            binding.textAddress.error = ""
         }
         if(binding.editTextBirthdate.text?.isEmpty()== true){
             isValid = false
             binding.textBirthdate.error = "Field is Empty"
         }
+        else{
+            binding.textBirthdate.error = ""
+        }
         if(binding.editTextGender.text?.isEmpty()== true){
             isValid = false
             binding.textGender.error = "Field is Empty"
         }
+        else{
+            binding.textGender.error = ""
+        }
         if(binding.editTextMobile.text?.isEmpty()== true){
             isValid = false
             binding.textMobile.error = "Field is Empty"
+        }
+        else{
+            binding.textMobile.error = ""
         }
         return isValid
     }

@@ -28,7 +28,7 @@ class PatientsViewModel @Inject constructor(private val repo: PatientsRepo):View
     }
 
 
-    private fun getPatients(){
+     fun getPatients(){
         viewModelScope.launch {
 
             try {
