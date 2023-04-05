@@ -3,7 +3,7 @@ package com.example.patientapp.presentation.features.add
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.patientapp.domain.model.add.BodyAddPatientModel
-import com.example.patientapp.domain.usecase.patients.AddPatientUseCase
+import com.example.patientapp.domain.usecase.add.AddPatientUseCase
 import com.example.patientapp.domain.model.add.AddPatientRemoteModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.patientapp.domain.model.patients.Data
 import com.example.patientapp.presentation.databinding.RowPatientBinding
 
-class PatientsAdapter():
+class PatientsAdapter(private val onDeletePatient:(id:String?) ->Unit):
     ListAdapter<Data?,PatientsAdapter.PatientsViewHolder>(DiffCallBack){
 
     var indexLastSelected = -1
@@ -45,7 +45,9 @@ class PatientsAdapter():
                     notifyItemChanged(position)
                 }
             }
-
+            binding.ivDelete.setOnClickListener {
+                onDeletePatient(model?.id)
+            }
         }
     }
 
