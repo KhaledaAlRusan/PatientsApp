@@ -5,16 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.patientapp.domain.model.delete.DeletePatientResponseModel
 import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.PatientsFragmentBinding
 import com.example.patientapp.presentation.features.patients.adapters.PatientsAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,7 +48,7 @@ class PatientsFragment:Fragment() {
     }
 
     private fun initAdapter() {
-        adapter = PatientsAdapter()
+        adapter = PatientsAdapter(::deletePatient,::onClickItem)
         binding.recyclerView.adapter = adapter
     }
 
@@ -63,7 +65,6 @@ class PatientsFragment:Fragment() {
                 binding.swipeRefresher.isRefreshing = false
             }
         }
-
     }
 
     private fun initObserver() {
@@ -86,9 +87,37 @@ class PatientsFragment:Fragment() {
                 if (it != null) {
                     Log.d("TAGGG", it.toString())
                 }
-
             }
+        }
+        lifecycleScope.launch {
+            viewModel.deletePatientsLiveData.observe(viewLifecycleOwner,::onPatientDeletedSuccess)
         }
     }
 
+
+    private fun onPatientDeletedSuccess(responseModel: DeletePatientResponseModel?){
+        if(responseModel !=null){
+            Toast.makeText(requireContext(), responseModel.message,Toast.LENGTH_SHORT).show()
+            viewModel.getPatients()
+        }
+    }
+
+
+
+    private fun deletePatient(id:String?){
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Do you want to delete this item?")
+            .setNegativeButton("No"){dialog,_ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Yes"){dialog,_ ->
+                viewModel.deletePatients(id)
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun onClickItem(id:String?){
+        findNavController().navigate(R.id.detailsPatientFragment  , bundleOf("id" to id))
+    }
 }

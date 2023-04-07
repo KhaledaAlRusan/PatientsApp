@@ -42,6 +42,18 @@
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.MaterialCardView"
                 tools:src="@tools:sample/avatars"/>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/iv_patient"
+                app:layout_constraintEnd_toEndOf="@id/iv_patient"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_delete"
+                />
+
+
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
@@ -54,6 +66,7 @@
                 app:layout_constraintStart_toStartOf = "parent"
                 app:layout_constraintTop_toBottomOf = "@id/iv_patient"
                 tools:text="@tools:sample/full_names"/>
+
 
 
             <androidx.appcompat.widget.AppCompatTextView

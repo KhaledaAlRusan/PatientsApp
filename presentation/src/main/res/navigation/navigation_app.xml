@@ -18,5 +18,11 @@
         android:name="com.example.patientapp.presentation.features.add.AddPatientFragment"
         android:label="AddPatientFragment" />
 
+    <fragment
+        android:id="@+id/detailsPatientFragment"
+        android:name="com.example.patientapp.presentation.features.details.DetailsPatientFragment"
+        android:label="DetailsPatientFragment"/>
+
+
 
 </navigation>

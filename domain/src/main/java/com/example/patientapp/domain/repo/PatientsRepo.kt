@@ -2,6 +2,7 @@ package com.example.patientapp.domain.repo
 
 import com.example.patientapp.domain.model.add.AddPatientRemoteModel
 import com.example.patientapp.domain.model.add.BodyAddPatientModel
+import com.example.patientapp.domain.model.delete.DeletePatientResponseModel
 import com.example.patientapp.domain.model.patients.Data
 
 interface PatientsRepo {
@@ -9,4 +10,8 @@ interface PatientsRepo {
     suspend fun getPatients(): List<Data?>?
 
     suspend fun addPatient(body: BodyAddPatientModel): AddPatientRemoteModel
+
+    suspend fun deletePatient(id: String?): DeletePatientResponseModel
+
+    suspend fun getPatientById(id:String):Data
 }
