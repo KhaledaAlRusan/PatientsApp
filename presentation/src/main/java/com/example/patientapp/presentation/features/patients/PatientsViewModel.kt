@@ -41,7 +41,7 @@ private val deletePatientUseCase: DeletePatientUseCase
 
      fun getPatients(){
         viewModelScope.launch {
-
+            _patientsLoadingStateFlow.emit(true)
             try {
                 _patientsStateFlow.emit(getPatientSortedByNameUseCase.invoke())
             }

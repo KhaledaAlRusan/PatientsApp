@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 
 @AndroidEntryPoint
 class PatientsFragment:Fragment() {
@@ -48,7 +48,7 @@ class PatientsFragment:Fragment() {
     }
 
     private fun initAdapter() {
-        adapter = PatientsAdapter(::deletePatient)
+        adapter = PatientsAdapter(::deletePatient,::onClickItem)
         binding.recyclerView.adapter = adapter
     }
 
@@ -65,7 +65,6 @@ class PatientsFragment:Fragment() {
                 binding.swipeRefresher.isRefreshing = false
             }
         }
-
     }
 
     private fun initObserver() {
@@ -88,7 +87,6 @@ class PatientsFragment:Fragment() {
                 if (it != null) {
                     Log.d("TAGGG", it.toString())
                 }
-
             }
         }
         lifecycleScope.launch {
@@ -102,7 +100,6 @@ class PatientsFragment:Fragment() {
             Toast.makeText(requireContext(), responseModel.message,Toast.LENGTH_SHORT).show()
             viewModel.getPatients()
         }
-
     }
 
 
@@ -118,7 +115,9 @@ class PatientsFragment:Fragment() {
                 dialog.dismiss()
             }
             .show()
-
     }
 
+    private fun onClickItem(id:String?){
+        findNavController().navigate(R.id.detailsPatientFragment  , bundleOf("id" to id))
+    }
 }

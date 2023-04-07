@@ -12,4 +12,6 @@ interface PatientsRepo {
     suspend fun addPatient(body: BodyAddPatientModel): AddPatientRemoteModel
 
     suspend fun deletePatient(id: String?): DeletePatientResponseModel
+
+    suspend fun getPatientById(id:String):Data
 }
