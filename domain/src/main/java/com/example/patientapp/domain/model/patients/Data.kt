@@ -35,3 +35,8 @@ data class Data(
     //Local var
     var selected:Boolean = false
 )
+{
+    fun getPatientInfo():String{
+        return "lives in $address \n Email: Born on $birthdate"
+    }
+}
