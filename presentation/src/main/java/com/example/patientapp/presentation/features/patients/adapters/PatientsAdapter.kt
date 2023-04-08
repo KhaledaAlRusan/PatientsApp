@@ -2,20 +2,17 @@ package com.example.patientapp.presentation.features.patients.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.patientapp.domain.model.patients.Data
-import com.example.patientapp.presentation.R
+import com.example.patientapp.domain.model.patients.PatientResponse
 import com.example.patientapp.presentation.databinding.RowPatientBinding
-import kotlin.reflect.KFunction1
 
 class PatientsAdapter(
     private val onDeletePatient:(id:String?) ->Unit,
     private val onClickItem: (id:String?) -> Unit
 ):
-    ListAdapter<Data?,PatientsAdapter.PatientsViewHolder>(DiffCallBack){
+    ListAdapter<PatientResponse,PatientsAdapter.PatientsViewHolder>(DiffCallBack){
 
     var indexLastSelected = -1
 
@@ -34,7 +31,7 @@ class PatientsAdapter(
 
 
     inner class PatientsViewHolder(private val binding:RowPatientBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: Data?, position: Int){
+        fun bind(model: PatientResponse, position: Int){
             binding.model = model
 
             binding.cardView.setOnClickListener{
@@ -50,21 +47,21 @@ class PatientsAdapter(
                     getItem(position)?.selected = true
                     notifyItemChanged(position)
                 }
-                onClickItem(model?.id)
+                onClickItem(model.id)
             }
             binding.ivDelete.setOnClickListener {
-                onDeletePatient(model?.id)
+                onDeletePatient(model.id)
             }
 
         }
     }
 
-    private object DiffCallBack:DiffUtil.ItemCallback<Data?>(){
-        override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
+    private object DiffCallBack:DiffUtil.ItemCallback<PatientResponse?>(){
+        override fun areItemsTheSame(oldItem: PatientResponse, newItem: PatientResponse): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
+        override fun areContentsTheSame(oldItem: PatientResponse, newItem: PatientResponse): Boolean {
             return oldItem == newItem
         }
 
