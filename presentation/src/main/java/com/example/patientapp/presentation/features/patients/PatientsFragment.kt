@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.patientapp.core.BaseFragment
-import com.example.patientapp.domain.model.delete.DeletePatientResponseModel
+import com.example.patientapp.domain.model.delete.PatientDeleteResponse
 import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.PatientsFragmentBinding
 import com.example.patientapp.presentation.features.patients.adapters.PatientsAdapter
@@ -95,7 +94,7 @@ class PatientsFragment : BaseFragment<PatientsFragmentBinding> (R.layout.patient
     }
 
 
-    private fun onPatientDeletedSuccess(responseModel: DeletePatientResponseModel?){
+    private fun onPatientDeletedSuccess(responseModel: PatientDeleteResponse?){
         if(responseModel !=null){
             Toast.makeText(requireContext(), responseModel.message,Toast.LENGTH_SHORT).show()
             viewModel.getPatients()

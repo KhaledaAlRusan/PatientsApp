@@ -1,9 +1,7 @@
 package com.example.patientapp.presentation.features.details
 
 import androidx.lifecycle.*
-import com.example.patientapp.domain.model.delete.DeletePatientResponseModel
-import com.example.patientapp.domain.model.patients.Data
-import com.example.patientapp.domain.repo.PatientsRepo
+import com.example.patientapp.domain.model.patients.PatientResponse
 import com.example.patientapp.domain.usecase.details.GetPatientByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +15,8 @@ class DetailsViewModel @Inject constructor(
     state:SavedStateHandle
 ):ViewModel() {
 
-    private val _detailsStateFlow: MutableStateFlow<Data?> = MutableStateFlow(null)
-    val detailsStateFlow: StateFlow<Data?> = _detailsStateFlow
+    private val _detailsStateFlow: MutableStateFlow<PatientResponse?> = MutableStateFlow(null)
+    val detailsStateFlow: StateFlow<PatientResponse?> = _detailsStateFlow
 
 
     private val _detailsLoadingStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)

@@ -6,17 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.patientapp.core.BaseFragment
-import com.example.patientapp.domain.model.add.BodyAddPatientModel
+import com.example.patientapp.domain.model.add.AddPatientRequest
 import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.FragmentAddPatientBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -51,8 +48,8 @@ class AddPatientFragment: BaseFragment<FragmentAddPatientBinding>(R.layout.fragm
         }
     }
 
-    private fun getInfoPatient(): BodyAddPatientModel {
-        return BodyAddPatientModel(
+    private fun getInfoPatient(): AddPatientRequest {
+        return AddPatientRequest(
             name = binding.editTextFullName.text.toString(),
             address = binding.editTextAddress.text.toString(),
             gender = binding.editTextGender.text.toString(),

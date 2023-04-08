@@ -2,9 +2,9 @@ package com.example.patientapp.presentation.features.add
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.patientapp.domain.model.add.BodyAddPatientModel
+import com.example.patientapp.domain.model.add.AddPatientRequest
 import com.example.patientapp.domain.usecase.add.AddPatientUseCase
-import com.example.patientapp.domain.model.add.AddPatientRemoteModel
+import com.example.patientapp.domain.model.add.AddPatientResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddPatientViewModel @Inject constructor(private val addPatientUseCase: AddPatientUseCase):ViewModel (){
 
-    private val _addPatientStateFlow: MutableStateFlow<AddPatientRemoteModel?> = MutableStateFlow(null)
+    private val _addPatientStateFlow: MutableStateFlow<AddPatientResponse?> = MutableStateFlow(null)
     val addPatientStateFlow= _addPatientStateFlow.asStateFlow()
 
     private val _addPatientLoadingStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -24,7 +24,7 @@ class AddPatientViewModel @Inject constructor(private val addPatientUseCase: Add
     val addPatientErrorStateFlow= _addPatientErrorStateFlow.asStateFlow()
 
 
-    fun addPatient(bodyAddPatientModel: BodyAddPatientModel){
+    fun addPatient(bodyAddPatientModel: AddPatientRequest){
         viewModelScope.launch {
 
             try {
