@@ -16,8 +16,8 @@ class PatientsRepoImpl @Inject constructor(private val patientDataSource: Patien
         return listSorted
     }
 
-    override suspend fun addPatient(bodyAddPatientModel: BodyAddPatientModel): AddPatientRemoteModel {
-        return patientDataSource.addPatient(bodyAddPatientModel)
+    override suspend fun addPatient(body: BodyAddPatientModel): AddPatientRemoteModel {
+        return patientDataSource.addPatient(body)
     }
 
     override suspend fun deletePatient(id: String?): DeletePatientResponseModel {

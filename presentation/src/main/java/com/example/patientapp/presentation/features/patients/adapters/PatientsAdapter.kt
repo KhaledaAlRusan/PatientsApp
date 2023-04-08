@@ -2,10 +2,12 @@ package com.example.patientapp.presentation.features.patients.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.patientapp.domain.model.patients.Data
+import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.RowPatientBinding
 import kotlin.reflect.KFunction1
 
@@ -38,10 +40,10 @@ class PatientsAdapter(
             binding.cardView.setOnClickListener{
                 if(position != indexLastSelected){
 
-                    //if not default
-                    if(indexLastSelected != -1){
-                        getItem(indexLastSelected)?.selected = false
-                        notifyItemChanged(indexLastSelected)
+                    // Set the 'selected' property of all items to false
+                    for (i in 0 until itemCount) {
+                        getItem(i)?.selected = false
+                        notifyItemChanged(i)
                     }
 
                     indexLastSelected = position
@@ -53,6 +55,7 @@ class PatientsAdapter(
             binding.ivDelete.setOnClickListener {
                 onDeletePatient(model?.id)
             }
+
         }
     }
 

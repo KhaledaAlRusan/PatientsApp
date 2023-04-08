@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.patientapp.core.BaseFragment
 import com.example.patientapp.domain.model.delete.DeletePatientResponseModel
 import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.PatientsFragmentBinding
@@ -22,9 +23,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PatientsFragment:Fragment() {
+class PatientsFragment : BaseFragment<PatientsFragmentBinding> (R.layout.patients_fragment) {
 
-    private lateinit var binding: PatientsFragmentBinding
     private val viewModel: PatientsViewModel by viewModels()
     private lateinit var adapter: PatientsAdapter
 
@@ -118,6 +118,6 @@ class PatientsFragment:Fragment() {
     }
 
     private fun onClickItem(id:String?){
-        findNavController().navigate(R.id.detailsPatientFragment  , bundleOf("id" to id))
+        findNavController().navigate(R.id.action_patientsFragment_to_detailsPatientFragment  , bundleOf("id" to id))
     }
 }
