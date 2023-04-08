@@ -1,6 +1,5 @@
 package com.example.patientapp.domain.model.add
 
-import com.example.patientapp.domain.model.patients.Test
 import com.google.gson.annotations.SerializedName
 
 data class AddPatientRemoteModel(
@@ -14,7 +13,6 @@ data class AddPatientRemoteModel(
     val mobile: String? = null,
     val name: String? = null,
     val photo: String? = null,
-    val tests: List<Test?>? = null,
     val updatedAt: String? = null,
     val v: Int? = null,
 )

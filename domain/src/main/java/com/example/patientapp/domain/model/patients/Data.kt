@@ -25,8 +25,6 @@ data class Data(
     @SerializedName("photo")
     val photo: String? = null,
     @SerializedName("tests")
-    val tests: List<Test?>? = null,
-    @SerializedName("updatedAt")
     val updatedAt: String? = null,
     @SerializedName("__v")
     val v: Int? = null,

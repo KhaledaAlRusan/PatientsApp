@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,6 +39,11 @@ class DetailsPatientFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fra
         super.onViewCreated(view, savedInstanceState)
 
         initObserver()
+        initView()
+    }
+
+    private fun initView() {
+        binding
     }
 
     private fun initObserver() {
@@ -60,9 +66,16 @@ class DetailsPatientFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fra
                 if (it != null) {
                     Log.d("TAGGG", it.toString())
                 }
-
             }
         }
 
+    }
+
+    fun String.addPoint():String{
+        return "$this."
+    }
+
+    fun AppCompatTextView.addPoint(){
+        this.text = text.toString().addPoint()
     }
 }
