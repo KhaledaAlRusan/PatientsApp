@@ -22,6 +22,6 @@ interface PatientDataSource {
     @DELETE("/patients/{id}")
     suspend fun deletePatient(@Path("id") id: String?): DeletePatientResponseModel
 
-    @GET("/patient/{id}")
+    @GET("/patients/{id}")
     suspend fun  getPatientById(@Path("id") id :String):GetPatientModel
 }

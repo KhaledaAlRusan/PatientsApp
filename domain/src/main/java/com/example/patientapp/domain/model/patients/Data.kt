@@ -37,6 +37,6 @@ data class Data(
 )
 {
     fun getPatientInfo():String{
-        return "lives in $address \n Email: Born on $birthdate"
+        return "lives in $address \nEmail: $email \nBorn on $birthdate"
     }
 }

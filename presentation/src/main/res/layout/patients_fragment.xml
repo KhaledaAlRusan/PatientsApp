@@ -36,6 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
         android:tint="@color/white"
-        android:src = "@drawable/ic_add"/>
+        android:src = "@drawable/ic_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

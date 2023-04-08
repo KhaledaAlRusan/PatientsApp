@@ -10,14 +10,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.patientapp.core.BaseFragment
+import com.example.patientapp.presentation.R
 import com.example.patientapp.presentation.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DetailsPatientFragment : Fragment(){
+class DetailsPatientFragment : BaseFragment<FragmentDetailsBinding>(R.layout.fragment_details){
 
-    private lateinit var binding: FragmentDetailsBinding
+
     private val viewModel:DetailsViewModel by viewModels()
 
 
@@ -42,9 +44,7 @@ class DetailsPatientFragment : Fragment(){
         lifecycleScope.launch {
             viewModel.detailsStateFlow.collect {
                 if (it != null) {
-                    Toast.makeText(requireContext(),
-                    it.toString(),
-                    Toast.LENGTH_SHORT).show()
+                   binding.model = it
                 }
             }
         }
