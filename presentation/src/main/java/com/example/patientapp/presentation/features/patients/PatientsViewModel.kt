@@ -16,8 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PatientsViewModel @Inject constructor(private val getPatientSortedByNameUseCase: GetPatientSortedByNameUseCase,
-private val deletePatientUseCase: DeletePatientUseCase
+class PatientsViewModel @Inject constructor(
+    private val getPatientSortedByNameUseCase: GetPatientSortedByNameUseCase,
+    private val deletePatientUseCase: DeletePatientUseCase
 ):ViewModel() {
 
     private val _patientsStateFlow:MutableStateFlow<List<PatientResponse?>?> = MutableStateFlow(emptyList())
@@ -42,7 +43,7 @@ private val deletePatientUseCase: DeletePatientUseCase
         viewModelScope.launch {
             _patientsLoadingStateFlow.emit(true)
             try {
-                _patientsStateFlow.emit(getPatientSortedByNameUseCase.invoke())
+                _patientsStateFlow.emit(getPatientSortedByNameUseCase())
             }
             catch (e:Exception){
                 _patientsErrorStateFlow.emit(e)
