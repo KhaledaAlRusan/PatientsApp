@@ -1,0 +1,80 @@
+name: Android APK Build and Release
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch
+    tags:
+      - 'v*'  # Trigger on version tags (e.g., v1.0)
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Set up Java Development Kit
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      # Cache Gradle dependencies
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Build APK
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      # Generate QR Code for the APK
+      - name: Generate QR Code
+        run: |
+          apk_url="https://github.com/${{ github.repository }}/releases/latest/download/app-release.apk"
+          qrencode -o qr_code.png "$apk_url"
+        shell: bash
+
+      # Create GitHub Release
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      # Upload APK to the GitHub Release
+      - name: Upload APK to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./app/build/outputs/apk/release/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
+
+      # Upload QR Code to the GitHub Release
+      - name: Upload QR Code to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./qr_code.png
+          asset_name: qr_code.png
+          asset_content_type: image/png
