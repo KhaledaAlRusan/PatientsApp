@@ -51,9 +51,9 @@ dependencies {
 
 
     //Dagger-Hilt
-    implementation "com.google.dagger:hilt-android:2.44"
+    implementation "com.google.dagger:hilt-android:2.50"
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.50"
     implementation "androidx.hilt:hilt-navigation-fragment:1.0.0"
 
 
