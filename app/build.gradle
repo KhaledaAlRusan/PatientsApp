@@ -18,6 +18,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    lintOptions {
+        baseline file("lint-baseline.xml")
+    }
 
     buildTypes {
         release {
@@ -43,7 +46,6 @@ dependencies {
     implementation project(":data")
     implementation project(":core")
     implementation project(":presentation")
-
 
     //Dagger-Hilt
     implementation "com.google.dagger:hilt-android:2.50"

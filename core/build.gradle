@@ -16,6 +16,9 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+    lintOptions {
+        baseline file("lint-baseline.xml")
+    }
     buildTypes {
         release {
             minifyEnabled false
